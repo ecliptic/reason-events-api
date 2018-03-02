@@ -1,0 +1,99 @@
+{
+  "name": "@ecliptic/reason-events-api",
+  "version": "0.1.0",
+  "description": "The Reason Events api server",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ecliptic/reason-events.git"
+  },
+  "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "reasonml",
+    "graphql",
+    "express"
+  ],
+  "scripts": {
+    "build": "yarn build.re && yarn build.container",
+    "build.re": "bsb -make-world",
+    "build.re.clean": "bsb -clean-world",
+    "build.re.watch": "yarn build.re -w",
+    "build.container": "docker build -t ecliptic/reason-events .",
+    "dev": "yarn dev.watch.debug",
+    "dev.run": "NODE_ENV=development dotenv node src/Server.bs.js",
+    "dev.debug": "DEBUG=reason-events:*,graphile-build:* yarn dev",
+    "dev.watch": "NODE_ENV=development dotenv nodemon src/Server.bs.js --delay 1",
+    "dev.watch.debug": "DEBUG=reason-events:*,graphile-build:* yarn dev.watch",
+    "migrate": "dotenv knex migrate:latest",
+    "precommit": "lint-staged",
+    "start": "./Server.bs",
+    "test.watch": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "@ecliptic/mnstr": "*",
+    "apollo-errors": "^1.7.1",
+    "apollo-server-express": "^1.3.2",
+    "body-parser": "^1.18.2",
+    "bs-abstract": "^0.12.0",
+    "bs-apollo-server-express": "^0.3.1",
+    "bs-chalk": "^0.2.1",
+    "bs-express": "^0.4.1",
+    "bs-graphql": "^0.3.1",
+    "bs-graphql-scalar": "^0.2.2",
+    "bs-graphql-tools": "^0.3.1",
+    "bs-moment": "^0.2.4",
+    "bs-node-debug": "^0.2.0",
+    "bs-promise-router": "^0.2.0",
+    "chalk": "^2.3.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "express-promise-router": "^3.0.1",
+    "graphql": "0.11.7",
+    "graphql-tag": "^2.8.0",
+    "graphql-tools": "^2.21.0",
+    "graphql-type-json": "^0.2.0",
+    "knex": "0.14.4",
+    "morgan": "^1.9.0",
+    "parse-database-url": "^0.3.0",
+    "pg": "^7.4.1",
+    "postgraphile": "^4.0.0-alpha2.33",
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "@playlyfe/gql": "^2.6.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "bs-platform": "2.2.2",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.18.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-react": "^6.0.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
+    "lint-staged": "^7.0.0",
+    "nodemon": "^1.17.1"
+  },
+  "resolutions": {
+    "graphql": "0.11.7"
+  },
+  "lint-staged": {
+    "src/**/*.re": [
+      "refmt --in-place",
+      "git add"
+    ]
+  }
+}

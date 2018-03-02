@@ -1,0 +1,32 @@
+{
+  "name": "@ecliptic/reason-events-api",
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "bs-dependencies": [
+    "@ecliptic/mnstr",
+    "bs-abstract",
+    "bs-apollo-server-express",
+    "bs-chalk",
+    "bs-express",
+    "bs-graphql",
+    "bs-graphql-scalar",
+    "bs-graphql-tools",
+    "bs-node-debug",
+    "bs-promise-router",
+    "bs-moment"
+  ],
+  "reason": {
+    "react-jsx": 2
+  },
+  "bsc-flags": ["-bs-super-errors"],
+  "refmt": 3
+}
