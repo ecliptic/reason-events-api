@@ -1,4 +1,4 @@
-open Mnstr;
+open MnstrServer;
 
 [@bs.module "postgraphile"] external postgraphile : (string, string, 'a) => Express.Middleware.t =
   "";
@@ -29,7 +29,7 @@ let onListen = (exn) =>
  * The start routine for the application server
  */
 let main = () =>
-  Server.Http.make(
+  Http.make(
     ~middleware=
       (default) =>
         default
@@ -42,7 +42,11 @@ let main = () =>
               {"appendPlugins": [|stripNullsFromDefaultFields|]}
             )
           )
-        ]
+        ],
+    ~isDev=Config.Server.isDev,
+    ~port=Config.Server.port,
+    ~onListen,
+    ()
   );
 
 /**
